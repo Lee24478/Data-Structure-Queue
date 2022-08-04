@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset = 'utf-8'/>
+		<title>排隊點餐</title>
+		<div><b><font color = 'red' size = '5'>###我李健立自己思考解決、絕無抄襲###</font></b></div> 
+		<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+		<style>
+			body{
+				text-align:center;
+			}
+			#logo{
+				position:absolute;
+				top:0;
+				left:0;
+			}
+			#grass{
+				position:absolute;
+				height: auto;
+				<!-- max-width: 100%; -->
+			}
+			.drink{
+				position:absolute;
+				<!-- height: auto; -->
+				<!-- max-width: 100%; -->
+			}
+			#num{width:3em;}
+		</style>
+	</head>
+	<body>
+		<a href = 'https://www.milkshoptea.com/products.php' target = '_blank'>
+		<img src = "https://img.onl/COd0Y" title = 'logo' id = 'logo' alt = 'logo'/> 
+		</a>
+		<img src = 'https://img.onl/cmsJeP' id = 'grass' alt = 'grass'/> 
+		<a href = 'https://milkshop.nidin.shop/' target = '_blank'>
+		<img src = 'https://img.onl/i24dSQ' class = 'drink' id = 'mer' alt = '商品' title = '飲品'/> 
+		</a>
+		<form>
+			<label for="name">您好，請問今天想喝點什麼：</label> 
+			<select size = '1' id = 'name'>
+				<option value = '0'>- - - - 選飲料 - - - -</option>
+				<option value = '1'>珍珠伯爵紅茶拿鐵</option>
+				<option value = '2'>芋圓茉香綠茶拿鐵</option>
+				<option value = '3'>珍珠蜂蜜檸檬晶凍</option>
+				<option value = '4'>香柚綠茶</option>
+				<option value = '5'>青檸香茶</option>
+			</select>
+			&nbsp;&nbsp;
+			<label for="num">數量：</label> 
+			<input type = 'number' id  = 'num' value = '1' min = '1' />
+			<input type="button" value="加入購物車" onclick = 'order()'/>
+			<input type = 'button' value = '結帳' onclick = 'buy()'/>
+			<input type = 'button' value = '清空購物車' onclick = 'cancel()'/>
+		</form>
+		<p id="b" style="font-size:20px;color:blue;"></p> 
+		<p id="b0" style="font-size:20px;color:blue;"></p> 
+		<p id="b1" style="font-size:16px;color:blue;"></p> 
+		<p id="b2" style="font-size:16px;color:blue;"></p> 
+		<p id="b3" style="font-size:16px;color:blue;"></p> 
+		<p id="b4" style="font-size:16px;color:blue;"></p> 
+		<p id="b5" style="font-size:16px;color:blue;"></p> 
+		<p id = 'de' style = "font-size:20px ; color:purple;"></p>
+		<p id = 'de1' style = "font-size:16px ; color:purple;"></p>
+		<p id = 'de2' style = "font-size:16px ; color:purple;"></p>
+		<p id = 'de3' style = "font-size:16px ; color:purple;"></p>
+		<p id = 'de4' style = "font-size:16px ; color:purple;"></p>
+		<p id = 'de5' style = "font-size:16px ; color:purple;"></p>
+		<p id = 'total' style = "font-size:20px ; color:purple;"></p>
+		<p id = 'daddy' style = "font-size:20px ; color:gold;"></p>
+		<p id="r" style="font-size:20px;color:red;"></p> 
+		<p id="r1" style="font-size:20px;color:red;"></p> 
+		<p id="gr" style="font-size:20px;color:gray;"></p> 
+		<p id = 'bla' class = 'drink'></p>
+		<p id = 'ref' class = 'drink' style = 'font-size:5px'>此作業參考自<a href = 'https://www.milkshoptea.com/products.php' target = '_blank'>迷客夏</a></p>
+		<p id = 'ref1' class = 'drink' style = 'font-size:5px'>歡迎<a href = 'https://milkshop.nidin.shop/' target = '_blank'>線上點餐</a></p>
+			<script>
+				var m70 = 70 , m60 = 60 , m50 = 50; 
+				var m1 = 0 , m2 = 0 , m3 = 0 , m4 = 0 , m5 = 0;
+				var l1 , l2 , l3 , l4 , l5 ;
+				var n1 , n2 , n3 , n4 , n5 ;
+				var total;
+				var WL = [1];
+				document.getElementById('bla').innerHTML = `目前排隊人數 ： ${WL.length} `;
+				var aaa = 2;
+				function order(){
+					document.getElementById('de').innerHTML = '';
+					document.getElementById('de1').innerHTML = '';
+					document.getElementById('de2').innerHTML = '';
+					document.getElementById('de3').innerHTML = '';
+					document.getElementById('de4').innerHTML = '';
+					document.getElementById('de5').innerHTML = '';
+					var x = document.getElementById("num").value;
+					if (x < 1){alert('數量有誤！')}
+					else if (x >= 1 && x == parseInt(x)){
+						var c = document.getElementById('name');
+						var cc = c.options[c.selectedIndex].value;
+						var ccc = c.options[c.selectedIndex].text;
+						switch (cc){
+							case'0':
+								alert('請選擇飲料！');
+								<!-- document.getElementById("b").innerHTML = '請選擇飲料！'; -->
+								break;
+							case'1':
+								document.getElementById('b0').innerHTML = '---------------購物清單---------------';
+								document.getElementById("b").innerHTML = '';
+								document.getElementById("b1").innerHTML = `${ccc} * ${x}`;
+								l1 = ccc ; 
+								n1 = x ; 
+								m1 = Number(x);
+								break;
+							case'2':
+								document.getElementById('b0').innerHTML = '---------------購物清單---------------';
+								document.getElementById("b").innerHTML = '';
+								document.getElementById("b2").innerHTML = `${ccc} * ${x}`;
+								l2 = ccc ; 
+								n2 = x ; 
+								m2 = Number(x);
+								break;
+							case'3':
+								document.getElementById('b0').innerHTML = '---------------購物清單---------------';
+								document.getElementById("b").innerHTML = '';
+								document.getElementById("b3").innerHTML = `${ccc} * ${x}`;
+								l3 = ccc ; 
+								n3 = x ; 
+								m3 = Number(x);
+								break;
+							case'4':
+								document.getElementById('b0').innerHTML = '---------------購物清單---------------';
+								document.getElementById("b").innerHTML = '';
+								document.getElementById("b4").innerHTML = `${ccc} * ${x}`;
+								l4 = ccc ; 
+								n4 = x ; 
+								m4 = Number(x);
+								break;
+							case'5':
+								document.getElementById('b0').innerHTML = '---------------購物清單---------------';
+								document.getElementById("b").innerHTML = '';
+								document.getElementById("b5").innerHTML = `${ccc} * ${x}`;
+								l5 = ccc ; 
+								n5 = x ; 
+								m5 = Number(x);
+								break;
+						}
+					}
+					else{alert('數量好好打很難嗎?? 有障礙是嗎╰（‵□′）╯')}
+					document.getElementById("num").value = 1;
+					document.getElementById('name').selectedIndex = 0;
+					document.getElementById("total").innerHTML = '';
+					document.getElementById("daddy").innerHTML = '';
+				}
+				function cancel(){
+					document.getElementById('b0').innerHTML = '';
+					document.getElementById("b").innerHTML = '';
+					document.getElementById("b1").innerHTML = '';
+					document.getElementById("b2").innerHTML = '';
+					document.getElementById("b3").innerHTML = '';
+					document.getElementById("b4").innerHTML = '';
+					document.getElementById("b5").innerHTML = '';
+					m1 = 0 , m2 = 0 , m3 = 0 , m4 = 0 , m5 = 0;
+					n1 = 0 , n2 = 0 , n3 = 0 , n4 = 0 , n5 = 0;
+					var total = 0;
+				}
+				function buy(){
+					var m = m1+m2+m3+m4+m5 ,tt = Math.ceil(m*90/60);
+					var total = m70*m1 + m70*m2 + m60*m3 + m60*m5 + m50*m4; 
+					var temp;
+					if (total >= 1000 && WL.length != 0){
+						document.getElementById("daddy").innerHTML = '謝謝把拔，您出手真闊氣，暈了暈了 (｡◕ ∀ ◕｡)';
+					}
+					if (m >= 20 && m < 50 && WL.length != 0){
+						alert('超過 20 杯以上的訂單需要製作較長的時間，建議下次可以提前預約唷！');
+						<!-- document.getElementById("total").innerHTML = `一共是 : ${total} 元，您的取餐編號是：${temp} 號，訂單完成後會再打電話通知您！`; -->
+					}
+					if (WL.length == 0){
+						<!-- WL.push(aaa++); -->
+						document.getElementById("total").innerHTML = '沒人排隊 嗚嗚QQ 準備倒店';
+						document.getElementById('de').innerHTML = '';
+						document.getElementById('de1').innerHTML = '';
+						document.getElementById('de2').innerHTML = '';
+						document.getElementById('de3').innerHTML = '';
+						document.getElementById('de4').innerHTML = '';
+						document.getElementById('de5').innerHTML = '';
+						document.getElementById("daddy").innerHTML = '';
+					}
+					else if (total == 0 ){
+						alert('您的購物車是空的');
+					}
+					else{
+						document.getElementById('de').innerHTML = '---------------明細---------------';
+						if (n1 >= 1){
+							document.getElementById("de1").innerHTML = `${l1} * ${n1}`;
+							}
+						if (n2 >= 1){
+							document.getElementById("de2").innerHTML = `${l2} * ${n2}`;
+							}
+						if (n3 >= 1){
+							document.getElementById("de3").innerHTML = `${l3} * ${n3}`;
+							}
+						if (n4 >= 1){
+							document.getElementById("de4").innerHTML = `${l4} * ${n4}`;
+							}	
+						if (n5 >= 1){
+							document.getElementById("de5").innerHTML = `${l5} * ${n5}`;
+							}
+						temp = WL[0]
+						document.getElementById("total").innerHTML = `一共是 : ${total} 元，您的取餐編號是：${temp} 號，請稍等大概 ${tt} 分鐘唷！`;
+						WL.shift();
+						document.getElementById('bla').innerHTML = `目前排隊人數 ： ${WL.length} `;
+						document.getElementById("gr").innerHTML = ' ';
+						if (WL.length < 6){
+							document.getElementById("r").innerHTML = ' ';
+						}
+					}
+					if (m >= 50){
+						alert('不好意思，現場沒辦法接受超過 50 杯以上的訂單唷，請事先打電話來確認！');
+						document.getElementById('de').innerHTML = '';
+						document.getElementById('de1').innerHTML = '';
+						document.getElementById('de2').innerHTML = '';
+						document.getElementById('de3').innerHTML = '';
+						document.getElementById('de4').innerHTML = '';
+						document.getElementById('de5').innerHTML = '';
+						document.getElementById("total").innerHTML = '';
+						document.getElementById("daddy").innerHTML = '';
+						if (temp != undefined){
+							WL.unshift(temp);
+						}	
+						document.getElementById('bla').innerHTML = `目前排隊人數 ： ${WL.length} `;
+					}
+					cancel()
+				}
+				var img_grass = document.getElementById('grass');
+				img_grass.style.top = '750px';
+				img_grass.style.left = '0px';
+				var img_mer = document.getElementById('mer');
+				img_mer.style.top = '50px';
+				img_mer.style.left = '180px';
+				var ref = document.getElementById('ref');
+				ref.style.left = '10px';
+				ref.style.bottom = '230px';
+				var ref1 = document.getElementById('ref1');
+				ref1.style.left = '10px';
+				ref1.style.bottom = '210px';
+				var l = document.getElementById('bla');
+				l.style.top = '305px';
+				l.style.left = '200px';
+				
+				<!-- var r1 = Math.floor((Math.random()*9+1));  //1~9 隨機數 -->
+				<!-- var r2 = Math.floor((Math.random()*9+1)); -->
+				<!-- var p1 = 139 , p2 = 149; -->
+				<!-- console.log(r1,r2); -->
+				
+				<!-- function order(){ -->
+					<!-- var x = document.getElementById("num").value; -->
+					<!-- console.log(x) -->
+					<!-- if (WL.length == 0){ -->
+						<!-- document.getElementById("b").innerHTML = '沒人排隊 嗚嗚QQ 準備倒店'; -->
+					<!-- } -->
+					<!-- else if (x == ''){ -->
+						<!-- document.getElementById("b").innerHTML = 'ㄜ...還沒點餐唷！'; -->
+					<!-- } -->
+					<!-- else if (x!=1 && x!=2 && x!=3 && x!=4 && x!=5 && x!=6 && x!=7 && x!=8 && x!=9){ -->
+						<!-- document.getElementById("b").innerHTML = '我們只有賣1~9號餐而已唷！'; -->
+					<!-- } -->
+					<!-- else if (x == r1){ -->
+						<!-- document.getElementById("b").innerHTML = `不好意思，${r1} 號餐今天賣完了 (・∀・) `; -->
+					<!-- } -->
+					<!-- else if (x == r2){ -->
+						<!-- document.getElementById("b").innerHTML = `不好意思，${r2} 號餐今天賣完了 (・∀・) `; -->
+					<!-- } -->
+					<!-- else if (x == 7 || x == 8 || x == 9){ -->
+						<!-- document.getElementById("b").innerHTML = `您點了 ${x} 號餐，一共是 ${p2} 元，您的取餐編號是：${WL[0]} 號，請稍等5分鐘唷！`; -->
+						<!-- WL.shift(); -->
+					<!-- } -->
+					<!-- else{ -->
+						<!-- document.getElementById("b").innerHTML = `您點了 ${x} 號餐，一共是 ${p1} 元，您的取餐編號是：${WL[0]} 號，請稍等5分鐘唷！`; -->
+						<!-- WL.shift(); -->
+					<!-- } -->
+					<!-- document.getElementById("num").value = ''; -->
+				<!-- } --> 
+				function SSS(W){
+					W.push(aaa); 
+					document.getElementById('bla').innerHTML = `目前排隊人數 ： ${W.length} `;
+					if (W.length >= 6){
+						document.getElementById("r").innerHTML = '後面已經有超過 5 個人在排隊囉，請盡快選擇餐點！';
+					}
+					else if (W.length < 6){
+						document.getElementById("r").innerHTML = ' ';
+					}
+					if (W.length > 10){
+						W.pop();
+						document.getElementById('bla').innerHTML = `目前排隊人數 ： ${W.length} `;
+						document.getElementById("gr").innerHTML = '前面有個白目不點餐 눈_눈  都不要喝阿！╰（‵□′）╯';
+						<!-- clearInterval(bbb); -->
+						<!-- console.log('stop'); -->
+						<!-- document.write("<font color = 'gray' size = '5';>前面有個白目不點餐 눈_눈  都不要吃阿！╰（‵□′）╯</font>"); -->
+					}
+					else if (W.length < 11){
+						aaa++;
+						document.getElementById("gr").innerHTML = ' ';
+					}
+				}
+				var bbb = setInterval(SSS,8000,WL); 
+			</script>
+	</body>
+</html>
